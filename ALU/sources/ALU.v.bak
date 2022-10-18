@@ -1,0 +1,17 @@
+module ALU 
+    #(parameter LENGTH = 8)
+    (
+        input [LENGTH]A,B,
+        output [LENGTH]result
+    );
+
+    parameter ADDITION_ARITHMETIC      = 3'b0000;
+    parameter SUBTRACTION_ARITHMETIC   = 3'b0001;
+    parameter NEGATIVE_ARITHMETIC      = 3'b0000;
+    parameter MULTIPLICATION_ARITHMETIC = 3'b0000;
+    parameter AND_LOGIC                = 3'b0000;
+    parameter OR_LOGIC                 = 3'b0000;
+    parameter NEGATIVE_LOGIC           = 3'b0000;
+    parameter XOR_LOGIC                = 3'b0000;
+    parameter SHIFT_LEFT               = 3'b0000;
+    parameter SHIFT_RIGHT              = 3'b0000;

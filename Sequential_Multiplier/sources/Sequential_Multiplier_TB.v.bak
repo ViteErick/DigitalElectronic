@@ -1,0 +1,60 @@
+module Sequential_Multiplier_TB ();
+parameter LENGTH = 5;
+reg start, clock, reset;
+reg [LENGTH-1:0]multiplier;
+reg [LENGTH-1:0]multiplicand;
+// output ready,
+//Product will be displayed on seven segment displays.
+wire seg_a_disp0, seg_b_disp0, seg_c_disp0, seg_d_disp0, seg_e_disp0, seg_f_disp0, seg_g_disp0;
+wire seg_a_disp1, seg_b_disp1, seg_c_disp1, seg_d_disp1, seg_e_disp1, seg_f_disp1, seg_g_disp1;
+wire seg_a_disp2, seg_b_disp2, seg_c_disp2, seg_d_disp2, seg_e_disp2, seg_f_disp2, seg_g_disp2;
+wire Computing, Ready, Negative;
+
+Sequential_Multiplier #(.LENGTH(LENGTH)) UUT(
+    .clock(clock),
+    .reset(reset),
+    .start(start),
+    .multiplier(multiplier),
+    .multiplicand(multiplicand),
+	 .seg_a_disp0(seg_a_disp0),
+	 .seg_b_disp0(seg_b_disp0),
+	 .seg_c_disp0(seg_c_disp0),
+	 .seg_d_disp0(seg_d_disp0),
+	 .seg_e_disp0(seg_e_disp0),
+	 .seg_f_disp0(seg_f_disp0),
+	 .seg_g_disp0(seg_g_disp0),
+	 .seg_a_disp1(seg_a_disp1),
+	 .seg_b_disp1(seg_b_disp1),
+	 .seg_c_disp1(seg_c_disp1),
+	 .seg_d_disp1(seg_d_disp1),
+	 .seg_e_disp1(seg_e_disp1),
+	 .seg_f_disp1(seg_f_disp1),
+	 .seg_g_disp1(seg_g_disp1),
+	 .seg_a_disp2(seg_a_disp2),
+	 .seg_b_disp2(seg_b_disp2),
+	 .seg_c_disp2(seg_c_disp2),
+	 .seg_d_disp2(seg_d_disp2),
+	 .seg_e_disp2(seg_e_disp2),
+	 .seg_f_disp2(seg_f_disp2),
+	 .seg_g_disp2(seg_g_disp2),
+	 .Computing(Computing),
+	 .Ready(Ready),
+	 .Negative(Negative)
+    );
+	 
+initial
+begin
+	start = 1'b1;
+	clock = 1'b0;
+	reset = 1'b0;
+	multiplier = 5'b01101;
+	multiplicand = 5'b11101;
+end
+
+always
+begin
+#10
+	clock = ~clock;
+end
+
+endmodule

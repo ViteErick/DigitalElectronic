@@ -1,0 +1,19 @@
+module register
+    #(parameter LENGTH_v = 5)
+    (
+        input clock,reset,enable,
+        input [LENGTH_v-1:0]D,
+        output reg [LENGTH_v-1:0]Q
+    );
+
+always @(posedge clock, posedge reset ) 
+    begin
+        if (reset) 
+            Q <= {LENGTH_v{1'b0}};
+        else
+            if (enable)
+                Q <= D;
+            else
+                Q <= Q;        
+    end
+endmodule

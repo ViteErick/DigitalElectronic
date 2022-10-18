@@ -1,0 +1,70 @@
+
+module FSM_SecuentialMultiplier (
+    input clock, reset, enable,
+    // input [LENGH-1:0]multiplicand, [LENGH-1:0]multiplier,
+    input readyResult,
+    // output [LENGH-1*2:0]result,
+    // output readyResult
+    output reg startComputing
+);
+
+localparam IDLE = 2'b00;
+localparam COMPUTING = 2'b01;
+localparam READY = 2'b10;
+
+reg [1:0]FMS_state;
+
+always @(posedge clock, posedge reset) 
+begin
+    if (reset) 
+    begin
+        FMS_state <= IDLE;
+    end else 
+        case (FMS_state)
+            IDLE:
+                begin
+                    if (enable) 
+                        FMS_state <= COMPUTING;
+                end
+
+            COMPUTING:
+                begin
+                    if (readyResult)
+                        FMS_state <= readyResult;
+                end
+
+            READY:
+                begin
+                    FMS_state <= IDLE;
+                end
+
+            default: FMS_state <= IDLE;
+        endcase
+end
+
+always @(FMS_state) 
+begin
+    case (FMS_state)
+        IDLE:
+            begin
+              startComputing = 1'b0;
+            end
+
+        COMPUTING:
+            begin
+                startComputing = 1'b1;
+            end
+
+        READY:
+            begin
+                startComputing = 1'b0;
+            end
+
+        default:
+            begin
+                startComputing = 1'b0;
+            end
+    endcase
+end
+    
+endmodule
